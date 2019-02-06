@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+tasks.eclipse.dependsOn(cleanEclipse)
+
+sourceCompatibility = targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+    maven {
+        url "https://repository.apache.org/content/repositories/snapshots/"
+    }
+}
+
+dependencies {
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: 'latest.release'
+    compile group: 'junit', name: 'junit', version:'latest.release'
+    compile group: 'org.hamcrest', name: 'hamcrest-library', version:'latest.release'
+    compile group: 'org.apache.commons', name: 'commons-imaging', version: '1.0-SNAPSHOT'
+    compile group: 'org.apache.commons', name: 'commons-io', version: 'latest.release'
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+tasks.withType(Test) {
+  systemProperties System.properties
+}
+
